@@ -1,0 +1,36 @@
+<!DOCTYPE = HTML>
+<html>
+<header>
+</header>
+
+<body>
+    <select id='mySelectField'>
+        <option value="Boston">Boston</option>
+        <option value="Chicago">Chicago</option>
+        <option value="New York">New York</option>
+        <option value="Seattle">Seattle</option>
+        <option value="San Francisco">San Francisco</option>
+    </select>
+    <button id='doAthing'>Do It Now!</button>
+    <script>
+    var select = document.getElementById('mySelectField')
+    var cityName
+    var button = document.getElementById('doAthing')
+    button.addEventListener('click', function() {
+        var index = select.selectedIndex
+        console.log(select.options[index].value)
+        cityName = select.options[index].value
+
+        var placeRequest = new XMLHttpRequest();
+        var URL = "http://localhost:3000/" + cityName
+        placeRequest.addEventListener("load", function() {
+            document.getElementById('display').innerText = placeRequest.response
+        })
+        placeRequest.open("GET", URL);
+        placeRequest.send();
+    })
+    </script>
+    <div id='display'></div>
+</body>
+
+</html>
